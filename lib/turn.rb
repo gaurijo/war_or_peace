@@ -16,7 +16,10 @@ class Turn
   end
 
   def pile_cards 
-    @spoils_of_war << @player1.deck.cards[0] << @player2.deck.cards[0]
+    x = []
+    x << @player1.deck.cards[0]
+    x << @player2.deck.cards[0]
+    @spoils_of_war << x
   end
 
   def award_spoils(winner)

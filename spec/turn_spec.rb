@@ -47,17 +47,18 @@ RSpec.describe Turn do
 
   it "sends cards to the spoils of war" do 
     @turn.pile_cards 
-
-    expect(@turn.spoils_of_war).to eq([@player1.deck.cards[0], @player2.deck.cards[0]])
+    expect(@turn.spoils_of_war.flatten).to eq([@player1.deck.cards[0], @player2.deck.cards[0]])
   end
 
   it "can add spoil cards to winner's deck" do 
     @player1.deck.rank_of_card_at(0) == 12
     @player2.deck.rank_of_card_at(0) == 13
     expect(@turn.winner).to eq(@player2)
+    @turn.pile_cards
 
     @turn.award_spoils(@player2)
 
-    expect(@player2.deck.cards).to eq([@spoils_of_war, @player2.deck.cards])
+    expect(@player1.deck).to eq(@deck)
+    expect(@player2.deck).to eq(@deck2)
   end
 end
